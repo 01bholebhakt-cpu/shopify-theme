@@ -1,0 +1,58 @@
+<section class="product-container" data-section="{{ section.id }}">
+  <div class="product-grid">
+    <!-- Image Gallery -->
+    <div class="product-media">
+      {% for image in product.images %}
+        <img src="{{ image | img_url: '800x' }}" alt="{{ image.alt }}" loading="lazy" class="zoom-image">
+      {% endfor %}
+    </div>
+
+    <!-- Product Details -->
+    <div class="product-info">
+      <nav class="breadcrumbs">
+        <a href="/">Home</a> / <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+      </nav>
+
+      <h1>{{ product.title }}</h1>
+      <div class="price-wrapper">{{ product.price | money }}</div>
+
+      {% form 'product', product %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        
+        <div class="variant-swatches">
+          <!-- Swatches Logic Here -->
+        </div>
+
+        <button type="submit" name="add" class="btn btn-full sticky-atc">
+          Add to Cart — {{ product.price | money }}
+        </button>
+      {% endform %}
+
+      <div class="product-benefits">
+        <ul>
+          <li>✓ Fast Worldwide Shipping</li>
+          <li>✓ 30-Day Money Back Guarantee</li>
+          <li>✓ Secure SSL Checkout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title }}",
+  "url": "{{ shop.url }}{{ product.url }}",
+  "image": "{{ product.featured_image | img_url: 'grande' }}",
+  "description": "{{ product.description | strip_html | truncatewords: 50 }}",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "{{ shop.currency }}",
+    "price": "{{ product.price | money_without_currency }}",
+    "availability": "http://schema.org/InStock"
+  }
+}
+</script>
