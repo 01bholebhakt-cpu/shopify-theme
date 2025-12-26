@@ -1,0 +1,8 @@
+layout/theme.liquid
+sections/hero-banner.liquid
+sections/featured-collection.liquid
+sections/product-template.liquid
+snippets/product-card.liquid
+snippets/cart-drawer.liquid
+assets/base.css
+assets/global.js
