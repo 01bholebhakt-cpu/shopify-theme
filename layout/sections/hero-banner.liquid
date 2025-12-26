@@ -1,0 +1,26 @@
+<section class="hero-section" style="background-image: url('{{ section.settings.image | img_url: '1800x' }}');">
+  <div class="container">
+    <div class="hero-content align-{{ section.settings.alignment }}">
+      <h1 class="hero-title">{{ section.settings.heading }}</h1>
+      <p class="hero-text">{{ section.settings.subheading }}</p>
+      <div class="hero-actions">
+        <a href="{{ section.settings.link }}" class="btn btn-primary">{{ section.settings.button_label }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background Image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Premium Quality [Niche]" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Describe your value proposition in one sentence." },
+    { "type": "url", "id": "link", "label": "Button Link" },
+    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Shop Now" },
+    { "type": "select", "id": "alignment", "label": "Alignment", "options": [{"value": "left", "label": "Left"}, {"value": "center", "label": "Center"}], "default": "center" }
+  ],
+  "presets": [{ "name": "Hero Banner" }]
+}
+{% endschema %}
